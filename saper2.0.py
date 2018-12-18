@@ -1,7 +1,6 @@
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
-
 import random
 import time
 import pygame
@@ -29,15 +28,20 @@ STATUS_SUCCESS = 3
 
 STATUS_ICONS = {
     STATUS_READY: "./images/plus.png",
-    STATUS_PLAYING: "./images/norm.png",
+    STATUS_PLAYING: "./images/crown.png",
     STATUS_FAILED: "./images/cross.png",
-    STATUS_SUCCESS: "./images/crown.png",
+    STATUS_SUCCESS: "./images/norm.png",
 }
 
+LEVELS = [
+    (8, 10),
+    (16, 40),
+    (24, 99)
+]
 
 def music_start():
     pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=4096)
-    MUSIC = ['peep', 'concorde', 'kicks']
+    MUSIC = ['concorde', 'kicks']
     name = random.choice(MUSIC)
     if name == 'concorde':
         pygame.mixer.music.load('conc.mp3')
@@ -154,25 +158,25 @@ class MainWindow(QMainWindow):
         w = QWidget()
         hb = QHBoxLayout()
 
-        menu = self.menuBar().addMenu("&Saper")
+        menu = self.menuBar().addMenu("&Settings")
 
-        deal1_action = QAction("Ambient_stop", self)
-        deal1_action.setShortcut('Ctrl+v')
-        deal1_action.setStatusTip('Music application')
-        deal1_action.triggered.connect(music_stop)
-        menu.addAction(deal1_action)
+        music_action = QAction("Ambient_stop", self)
+        music_action.setShortcut('Ctrl+v')
+        music_action.setStatusTip('Music application')
+        music_action.triggered.connect(music_stop)
+        menu.addAction(music_action)
 
-        deal2_action = QAction("Ambient_start", self)
-        deal2_action.setShortcut('Ctrl+b')
-        deal2_action.setStatusTip('Music application')
-        deal2_action.triggered.connect(music_start)
-        menu.addAction(deal2_action)
+        music_action2 = QAction("Ambient_start", self)
+        music_action2.setShortcut('Ctrl+b')
+        music_action2.setStatusTip('Music application')
+        music_action2.triggered.connect(music_start)
+        menu.addAction(music_action2)
 
-        deal3_action = QAction("Exit", self)
-        deal3_action.setShortcut('Ctrl+j')
-        deal3_action.setStatusTip('Exit application')
-        deal3_action.triggered.connect(exit)
-        menu.addAction(deal3_action)
+        exit_action = QAction("Exit", self)
+        exit_action.setShortcut('Ctrl+j')
+        exit_action.setStatusTip('Exit application')
+        exit_action.triggered.connect(exit)
+        menu.addAction(exit_action)
 
         self.mines = QLabel()
         self.mines.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
